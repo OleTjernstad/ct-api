@@ -1,9 +1,15 @@
-import { Hono } from 'hono'
+import { Hono } from "hono";
+import { auth } from "./lib/auth";
+import { cors } from "hono/cors";
 
-const app = new Hono()
+const app = new Hono<{ Bindings: CloudflareBindings }>();
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.get("/", (c) => c.json({ message: "Cachetur API is running!" }));
+app.notFound((c) => c.json({ message: "Not Found", ok: false }, 404));
 
-export default app
+app.use("/api/*", cors());
+
+app.on(["GET", "POST"], "/api/*", (c) => {
+  return auth(c.env).handler(c.req.raw);
+});
+export default app;
