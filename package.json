@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
-    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "better-auth-generate": "npx @better-auth/cli@latest generate --config ./better-auth.config.ts",
+    "db:generate": "prisma generate --no-engine"
   },
   "dependencies": {
     "@prisma/client": "^6.12.0",

@@ -1,4 +1,5 @@
 import { BetterAuthOptions } from "better-auth";
+import { username } from "better-auth/plugins";
 
 /**
  * Custom options for Better Auth
@@ -14,8 +15,8 @@ export const betterAuthOptions: BetterAuthOptions = {
    * Base path for Better Auth.
    * @default "/api/auth"
    */
-  basePath: "/api",
-
+  basePath: "/api/auth",
+  plugins: [username()],
   emailAndPassword: {
     enabled: true,
   },

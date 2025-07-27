@@ -1,6 +1,6 @@
-import { PrismaClient } from "@/generated/prisma";
 import { betterAuth } from "better-auth";
 import { betterAuthOptions } from "./options";
+import { getPrisma } from "../prisma";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 
 /**
@@ -9,7 +9,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 export const auth = (
   env: CloudflareBindings
 ): ReturnType<typeof betterAuth> => {
-  const prisma = new PrismaClient();
+  const prisma = getPrisma(env.DATABASE_URL);
 
   return betterAuth({
     ...betterAuthOptions,
