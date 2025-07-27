@@ -11,7 +11,10 @@ app.use(
   "/api/*",
   cors({
     origin: "http://localhost:3000",
-    allowHeaders: ["Access-Control-Allow-Credentials", "Content-Type"],
+    allowHeaders: ["Content-Type", "Authorization"],
+    allowMethods: ["POST", "GET", "OPTIONS"],
+    exposeHeaders: ["Content-Length"],
+    maxAge: 600,
     credentials: true,
   })
 );
