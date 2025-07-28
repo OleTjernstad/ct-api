@@ -15,6 +15,16 @@ users.get("/", async (c) => {
   return c.json({ users }, 200);
 });
 users.post("/", (c) => c.json("create a user", 201));
-users.get("/:id", (c) => c.json(`get ${c.req.param("id")}`));
+users.get("/:id", async (c) => {
+  const userSession = c.get("user");
+
+  if (!userSession) return c.body(null, 401);
+
+  const prisma = getPrisma(c.env.DATABASE_URL);
+  const user = await prisma.user.findUnique({
+    where: { id: c.req.param("id") },
+  });
+  return c.json({ user }, 200);
+});
 
 export default users;
