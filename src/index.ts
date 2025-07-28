@@ -7,11 +7,8 @@ import users from "./routes/users";
 
 const app = new Hono<Variables>();
 
-app.get("/", (c) => c.json({ message: "Cachetur API is running!" }));
-app.notFound((c) => c.json({ message: "Not Found", ok: false }, 404));
-
+// Register CORS middleware globally
 app.use(
-  "/api/*",
   cors({
     origin: ["http://localhost:3000", "https://cachetur.vercel.app"],
     allowHeaders: ["Content-Type", "Authorization"],
@@ -21,6 +18,12 @@ app.use(
     credentials: true,
   })
 );
+
+app.get("/", (c) => c.json({ message: "Cachetur API is running!" }));
+app.notFound((c) => c.json({ message: "Not Found", ok: false }, 404));
+
+// Explicitly handle OPTIONS requests for CORS preflight
+app.options("/api/*", (c) => c.body(null, 204));
 
 app.use("*", async (c, next) => {
   const session = await auth(c.env).api.getSession({
