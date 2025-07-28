@@ -10,7 +10,7 @@ const app = new Hono<Variables>();
 // Register CORS middleware globally
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://cachetur.vercel.app"],
+    origin: (origin, c) => c.env.ORIGIN || "*",
     allowHeaders: ["Content-Type", "Authorization"],
     allowMethods: ["POST", "GET", "OPTIONS"],
     exposeHeaders: ["Content-Length"],
