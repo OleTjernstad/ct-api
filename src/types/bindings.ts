@@ -1,7 +1,7 @@
 import { Session, User } from "@/generated/prisma";
 
 export type Variables = {
-  Bindings: Env;
+  Bindings: CloudflareBindings;
   Variables: {
     user: User | null;
     session: Session | null;
