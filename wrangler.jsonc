@@ -8,7 +8,7 @@
   // ],
    "vars": {
      "BETTER_AUTH_URL": "https://ct.olet.no",
-     "ORIGIN": "https://cachetur.vercel.app/"
+     "ORIGIN": "https://cachetur.vercel.app"
    },
   // "kv_namespaces": [
   //   {
