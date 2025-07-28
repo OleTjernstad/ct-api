@@ -16,7 +16,7 @@ export const betterAuthOptions: BetterAuthOptions = {
    * @default "/api/auth"
    */
   basePath: "/api/auth",
-  trustedOrigins: ["http://localhost:3000"],
+  trustedOrigins: ["http://localhost:3000", "https://cachetur.vercel.app"],
   plugins: [username()],
   emailAndPassword: {
     enabled: true,

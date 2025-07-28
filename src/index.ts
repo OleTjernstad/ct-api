@@ -13,7 +13,7 @@ app.notFound((c) => c.json({ message: "Not Found", ok: false }, 404));
 app.use(
   "/api/*",
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://cachetur.vercel.app"],
     allowHeaders: ["Content-Type", "Authorization"],
     allowMethods: ["POST", "GET", "OPTIONS"],
     exposeHeaders: ["Content-Length"],
