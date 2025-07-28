@@ -16,9 +16,23 @@ export const betterAuthOptions: BetterAuthOptions = {
    * @default "/api/auth"
    */
   basePath: "/api/auth",
+  trustedOrigins: ["http://localhost:3000"],
   plugins: [username()],
   emailAndPassword: {
     enabled: true,
+    requireEmailVerification: true,
+  },
+  emailVerification: {
+    sendVerificationEmail: async ({ user, url, token }, request) => {
+      console.log(
+        "Sending verification email to",
+        user.email,
+        "with token",
+        token,
+        "and URL",
+        url
+      );
+    },
   },
   advanced: {
     defaultCookieAttributes: {
