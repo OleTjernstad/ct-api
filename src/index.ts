@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { Variables } from "./types/bindings";
 import { auth } from "./lib/auth";
+import authRoute from "./routes/auth";
 import { cors } from "hono/cors";
 import users from "./routes/users";
 
@@ -47,8 +48,6 @@ app.use("*", async (c, next) => {
 });
 
 app.route("/api/users", users);
+app.route("/api/auth", authRoute);
 
-app.on(["GET", "POST"], "/api/auth/*", (c) => {
-  return auth(c.env).handler(c.req.raw);
-});
 export default app;
